@@ -1,5 +1,7 @@
 import tensorflow as tf
 
+'''This is tf implementation of madgwick filter for pre-existing python ahrs'''
+
 def dcm(q):
     if q.shape[-1]!=4:
         raise ValueError("Quaternion must be of the form (4,) or (N, 4)")
