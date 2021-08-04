@@ -23,6 +23,11 @@ def dcm(q):
                         [R10[i],R11[i],R12[i]],
                         [R20[i],R21[i],R22[i]]])
         return R.stack()
+    q /= tf.linalg.norm(q)
+    return tf.convert_to_tensor([
+            [1.0-2.0*(q[2]**2+q[3]**2), 2.0*(q[1]*q[2]-q[0]*q[3]), 2.0*(q[1]*q[3]+q[0]*q[2])],
+            [2.0*(q[1]*q[2]+q[0]*q[3]), 1.0-2.0*(q[1]**2+q[3]**2), 2.0*(q[2]*q[3]-q[0]*q[1])],
+            [2.0*(q[1]*q[3]-q[0]*q[2]), 2.0*(q[0]*q[1]+q[2]*q[3]), 1.0-2.0*(q[1]**2+q[2]**2)]],dtype=tf.float64)
 
 def q_conj(q: tf.Tensor) -> tf.Tensor:
     if len(q.shape)>2 or q.shape[-1]!=4:
