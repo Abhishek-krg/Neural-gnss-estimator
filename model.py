@@ -183,9 +183,9 @@ class gnss_estimator:
 
         Q=madgwick_filter()(acc,gyr,mag,q0) # madgwick sampling freq and gain are hyper-parameter and can be assigned while calling model 
 
-        ACC_E,ACC_N=compute_accel()(Q,acc)
+        R=compute_accel()(Q,acc)
 
-        output=estimator_outputs()(ACC_E,ACC_N,delta_t,theta,phi)
+        output=estimator_outputs()(R,delta_t,theta,phi)
 
         return tf.function(func=tf.keras.Model(inputs=[acc,gyr,mag,delta_t,theta,phi,q0],outputs=[output,Q[-1][-1]]))
 
@@ -229,9 +229,9 @@ class gnss_estimator:
 
         Q=madgwick_filter()(acc_corr,gyr_corr,mag_corr,q0)
 
-        ACC_E,ACC_N=compute_accel()(Q,acc_corr)
+        R=compute_accel()(Q,acc_corr)
 
-        output=estimator_outputs()(ACC_E,ACC_N,delta_t,theta,phi)
+        output=estimator_outputs()(R,delta_t,theta,phi)
 
         return tf.keras.Model(inputs=[acc,gyr,mag,delta_t,theta,phi,acc_states,gyr_states,mag_states,device,q0],outputs=[output,acc_states_out,gyr_states_out,mag_states_out,Q[-1][-1]])
 
