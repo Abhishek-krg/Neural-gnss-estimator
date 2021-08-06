@@ -67,7 +67,7 @@ class madgwick_filter(tf.keras.layers.Layer):
     """
          _________________________________________________________________________________________________________
         |                                                                                                         |
-        |   Standard Madgwick filter implements python ahrs in tf:                                       |
+        |   Standard Madgwick filter implements python ahrs in tf:                                                |
         |       Computes 3D rotation in terms of Quaternions given the acc, gyr and mag readings                  |
         |                                                                                                         |
         |           q[t] = madgwick_filter(q[t-1], acc[t], gyr[t], mag[t])                                        |
